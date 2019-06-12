@@ -10,7 +10,7 @@ server.use(express.json());
 server.use(heltmet());
 server.use(logger('dev'));
 
-server.use('/api/users', userRoutes);
+server.use('/api/', userRoutes);
 
 server.get('/', (req, res) => {
    res.send("<h1>Hello, it works.</h1>");
