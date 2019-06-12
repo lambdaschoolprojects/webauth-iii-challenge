@@ -13,7 +13,17 @@ const addUser = (user) => {
     return result;
 }
 
+const getUserByUsername = username => {
+    const user = db('users').where({ username }).first();
+
+    if (user)
+        return user;
+    else
+        return null;
+}
+
 module.exports = {
     getUsers,
+    getUserByUsername,
     addUser
 }
