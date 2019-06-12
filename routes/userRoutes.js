@@ -9,4 +9,18 @@ router.get('/', async (req, res) => {
     res.status(200).json({users});
 })
 
+router.post('/', async (req, res) => {
+
+    try {
+        const result = await db.addUser(req.body);
+
+        if (result)
+            res.status(201).json({ message: "User created" });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+
+})
+
 module.exports = router;

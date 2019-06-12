@@ -7,6 +7,13 @@ const getUsers = () => {
     return db('users');
 }
 
+const addUser = (user) => {
+    const result = db('users').insert(user);
+
+    return result;
+}
+
 module.exports = {
-    getUsers
+    getUsers,
+    addUser
 }
