@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/register";
+import api from "../helpers/api";
 
 class Register extends Component {
   state = {
@@ -14,9 +13,11 @@ class Register extends Component {
     e.preventDefault();
 
     try {
-      const result = await axios.post(API_URL, {
+      const result = await api.post("/register", {
         ...this.state
       });
+
+      console.log(result);
     } catch (err) {
       console.log(err);
     } finally {
@@ -31,7 +32,7 @@ class Register extends Component {
     return (
       <div data-test="component-register">
         <form>
-          <label for="username">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
@@ -39,15 +40,15 @@ class Register extends Component {
             onChange={e => this.setState({ username: e.target.value })}
             data-test="username-input"
           />
-          <label for="department">Department</label>
+          <label htmlFor="department">Department</label>
           <input
             type="text"
             name="department"
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-            data-test="password-input"
+            value={this.state.department}
+            onChange={e => this.setState({ department: e.target.value })}
+            data-test="department-input"
           />
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"

@@ -20,6 +20,7 @@ function generateToken(user) {
 }
 
 router.get("/users", async (req, res) => {
+  console.log(req.headers);
   const users = await db.getUsers();
 
   res.status(200).json({ users });
@@ -27,7 +28,12 @@ router.get("/users", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   let { password } = req.body;
-  password = bcrypt.hashSync(password, 14);
+
+  console.log("test test");
+
+  password = bcrypt.hashSync(password, 5);
+
+  console.log("test");
 
   try {
     const result = await db.addUser({ ...req.body, password });
@@ -43,8 +49,12 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
+  console.log(req.body);
+
   try {
     const user = await db.getUserByUsername(username);
+
+    console.log(password, user.password);
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken(user);

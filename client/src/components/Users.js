@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 import User from "./User";
 import api from "../helpers/api";
+import withAuth from "../helpers/withAuth";
 
 class Users extends Component {
   state = {
@@ -13,9 +13,9 @@ class Users extends Component {
     try {
       const result = await api.get("/users");
 
-      this.setState({
-        users: result.data
-      });
+      this.setState(() => ({
+        users: result.data.users
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -26,10 +26,10 @@ class Users extends Component {
       <div data-test="component-users">
         <ul data-test="users">
           {this.state.users &&
-            this.state.props.map(user => {
+            this.state.users.map(user => {
               return (
-                <li data-test="user">
-                  <User {...user} />
+                <li key={user.id} data-test="user">
+                  <User key={user.id} {...user} />
                 </li>
               );
             })}
@@ -39,4 +39,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default withAuth(Users);
