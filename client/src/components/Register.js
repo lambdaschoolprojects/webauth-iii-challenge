@@ -31,6 +31,7 @@ class Register extends Component {
     return (
       <div data-test="component-register">
         <form>
+          <label for="username">Username</label>
           <input
             type="text"
             name="username"
@@ -38,6 +39,7 @@ class Register extends Component {
             onChange={e => this.setState({ username: e.target.value })}
             data-test="username-input"
           />
+          <label for="department">Department</label>
           <input
             type="text"
             name="department"
@@ -45,6 +47,7 @@ class Register extends Component {
             onChange={e => this.setState({ password: e.target.value })}
             data-test="password-input"
           />
+          <label for="password">Password</label>
           <input
             type="password"
             name="password"

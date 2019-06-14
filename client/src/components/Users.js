@@ -6,7 +6,7 @@ import api from "../helpers/api";
 
 class Users extends Component {
   state = {
-    users: []
+    users: null
   };
 
   async componentDidMount() {
@@ -25,13 +25,14 @@ class Users extends Component {
     return (
       <div data-test="component-users">
         <ul data-test="users">
-          {props.users &&
-            props.users.map(user => {
-              <li data-test="user">
-                <User {...user} />
-              </li>;
+          {this.state.users &&
+            this.state.props.map(user => {
+              return (
+                <li data-test="user">
+                  <User {...user} />
+                </li>
+              );
             })}
-          )}
         </ul>
       </div>
     );
