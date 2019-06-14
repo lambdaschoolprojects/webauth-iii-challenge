@@ -4,8 +4,8 @@
  * @param {string} val
  * @returns {ShallowWrapper}
  */
-const findElementByAttrs = (wrapper, attr) => {
-    const selector = `[data-test="${attr}"]`;
+export const findElementByAttrs = (wrapper, attr) => {
+  const selector = `[data-test="${attr}"]`;
 
-    return wrapper.find(selector);
-}
+  return wrapper.find(selector);
+};
