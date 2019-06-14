@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+const API_URL = "http://localhost:5000/api/login";
+
 class Login extends Component {
   state = {
     username: "",
     password: ""
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
-    this.setState(prevState => ({
-      username: "",
-      password: ""
-    }));
+    try {
+      const result = await axios.post(API_URL, {
+        ...this.state
+      });
+
+      console.log(result);
+
+      localStorage.setItem("jwt", result.data.token);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      this.setState(prevState => ({
+        username: "",
+        password: ""
+      }));
+    }
   };
   render() {
     return (
